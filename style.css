@@ -278,36 +278,26 @@ footer {
     gap: 8px;
 }
 
-/* Container handles both layout styles automatically */
+/* Flexbox Gallery (Handles 1-3 cards or horizontal scrolling for 4+) */
 .screenshot-grid {
     display: flex;
     gap: 20px;
     margin-top: 20px;
-    
-    /* Enables horizontal scroll if items overflow */
     overflow-x: auto;
-    padding-bottom: 12px; /* Space for the scrollbar */
-    
-    /* Smooth touch scrolling for mobile devices */
+    padding-bottom: 12px;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
 }
 
-/* Individual image card dimensions */
 .screenshot-item {
-    /* 
-       For 1-3 items: Shrinks/grows to fit 3 columns nicely.
-       Min-width prevents images from squishing down too small when > 3 items.
-    */
     flex: 1 0 calc(33.333% - 14px);
-    min-width: 260px; 
-    
+    min-width: 260px;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.2s ease, border-color 0.2s ease;
-    scroll-snap-align: start; /* Snaps cleanly into view while scrolling */
+    scroll-snap-align: start;
 }
 
 .screenshot-item:hover {
@@ -320,9 +310,10 @@ footer {
     height: 180px;
     object-fit: cover;
     display: block;
+    cursor: pointer; /* Ensures pointer cursor works */
 }
 
-/* Optional: Subtle, custom dark scrollbar styling */
+/* Scrollbar Customization */
 .screenshot-grid::-webkit-scrollbar {
     height: 6px;
 }
@@ -341,10 +332,10 @@ footer {
     background: var(--accent);
 }
 
-/* Responsive adjustment for tablet/mobile screens */
+/* Responsive adjustment for small screens */
 @media (max-width: 768px) {
-    .screenshot-grid {
-        grid-template-columns: 1fr; /* Stack screenshots vertically on small screens */
+    .screenshot-item {
+        min-width: 80%; /* Allows comfortable horizontal swiping on mobile */
     }
 }
 
@@ -352,20 +343,19 @@ footer {
    Image Lightbox Modal
    ========================================== */
 .modal {
-    display: none; /* Hidden by default */
+    display: none; /* Controlled by JS */
     position: fixed;
-    z-index: 1000;
+    z-index: 2000; /* Bumped higher than header (1000) */
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Darkens the page behind */
-    backdrop-filter: blur(4px); /* Adds a subtle background blur */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(5px);
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    animation: fadeIn 0.2s ease-in-out;
 }
 
 .modal-content-wrapper {
@@ -375,6 +365,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none; /* Lets clicks pass through to background overlay */
 }
 
 .modal-content {
@@ -382,30 +373,25 @@ footer {
     max-height: 85vh;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    pointer-events: auto; /* Re-enables interactions on the image itself */
 }
 
-/* Close (X) Button */
 .modal-close {
-    position: absolute;
+    position: fixed;
     top: 20px;
-    right: 35px;
+    right: 30px;
     color: #ffffff;
-    font-size: 40px;
+    font-size: 42px;
     font-weight: bold;
     cursor: pointer;
     transition: color 0.2s ease;
     user-select: none;
-    z-index: 1001;
+    z-index: 2001;
 }
 
 .modal-close:hover {
-    color: var(--accent, #007bff);
-}
-
-/* Pointer cursor for clickable gallery thumbnails */
-.screenshot-item img {
-    cursor: pointer;
+    color: var(--accent);
 }
 
 @keyframes fadeIn {
