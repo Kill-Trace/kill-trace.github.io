@@ -96,5 +96,52 @@
         <p>&copy; Ericson Lacambra. All rights reserved.</p>
     </footer>
 
+    <!-- Image Lightbox Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content-wrapper">
+            <img class="modal-content" id="expandedImg" alt="Enlarged screenshot">
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('expandedImg');
+        const closeBtn = document.querySelector('.modal-close');
+
+        // Attach click event to all screenshot images
+        document.querySelectorAll('.screenshot-item img').forEach(img => {
+            img.addEventListener('click', function () {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                document.body.style.overflow = 'hidden'; // Prevents background scrolling while modal is open
+            });
+        });
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restores background scrolling
+        }
+
+        // Close on 'X' click
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close on clicking the dark background outside the image
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal || e.target.classList.contains('modal-content-wrapper')) {
+                closeModal();
+            }
+        });
+
+        // Close on pressing the 'Escape' key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+    </script>
+    
 </body>
 </html>
