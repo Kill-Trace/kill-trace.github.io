@@ -347,3 +347,68 @@ footer {
         grid-template-columns: 1fr; /* Stack screenshots vertically on small screens */
     }
 }
+
+/* ==========================================
+   Image Lightbox Modal
+   ========================================== */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Darkens the page behind */
+    backdrop-filter: blur(4px); /* Adds a subtle background blur */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content-wrapper {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Close (X) Button */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
+    z-index: 1001;
+}
+
+.modal-close:hover {
+    color: var(--accent, #007bff);
+}
+
+/* Pointer cursor for clickable gallery thumbnails */
+.screenshot-item img {
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
