@@ -115,7 +115,7 @@ nav {
 .tagline {
     color: var(--text-secondary);
     max-width: 700px;
-    margin: 15px 0 30px;
+    margin: 15px auto 30px auto;
     text-align: center;
 }
 
