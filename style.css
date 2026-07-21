@@ -7,6 +7,73 @@
     --accent-hover: #0284c7;
 }
 
+/* Header & Fixed Sticky Navigation */
+header {
+    background-color: rgba(15, 23, 42, 0.95); /* Semi-transparent background matching --bg-color */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed; /* Fixes to top of screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start; /* Aligns content to the top-left */
+    align-items: center;
+    gap: 2rem;
+    padding: 0.8rem 20px;
+}
+
+.logo {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Space between pill buttons */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    list-style-type: none; /* Explicitly removes default bullet points */
+}
+
+/* Make ALL navbar links look like uniform pill buttons */
+.nav-links a {
+    display: inline-block;
+    color: var(--accent) !important; /* High contrast cyan/blue */
+    background-color: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+    background-color: rgba(56, 189, 248, 0.2);
+    border-color: var(--accent);
+    color: #ffffff !important;
+}
+
+/* Offset body padding so fixed header doesn't cover top content */
+body {
+    padding-top: 70px;
+}
+
 body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
